@@ -81,6 +81,7 @@ static void set_uclamp_min(int tid, int min) {
 }
 }  // namespace
 
+// TODO(jimmyshiu@): Deprecated. Remove once all powerhint.json up-to-date.
 void PowerSessionManager::updateHintMode(const std::string &mode, bool enabled) {
     ALOGV("PowerSessionManager::updateHintMode: mode: %s, enabled: %d", mode.c_str(), enabled);
     if (enabled && mode.compare(0, 8, "REFRESH_") == 0) {
@@ -92,8 +93,8 @@ void PowerSessionManager::updateHintMode(const std::string &mode, bool enabled) 
             mDisplayRefreshRate = 60;
         }
     }
-    if (HintManager::GetInstance()->GetAdpfProfile()) {
-        HintManager::GetInstance()->SetAdpfProfile(mode);
+    if (HintManager::GetInstance()->GetAdpfProfileFromDoHint()) {
+        HintManager::GetInstance()->SetAdpfProfileFromDoHint(mode);
     }
 }
 
